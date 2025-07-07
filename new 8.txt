@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+  <version>6.0</version>
+  <date>2025-06-19T12:00:00Z</date>
+  <templates>
+    <template>
+      <template>Template ISP Monitoring - Dual WAN</template>
+      <name>Template ISP Monitoring - Dual WAN</name>
+      <description>Monitoring dual ISP via ICMP ping</description>
+      <groups>
+        <group>
+          <name>Templates/Network</name>
+        </group>
+      </groups>
+      <applications>
+        <application>
+          <name>ISP Monitoring</name>
+        </application>
+      </applications>
+      <items>
+        <item>
+          <name>Ping ISP 1</name>
+          <type>0</type>
+          <snmp_community/>
+          <key>icmpping[{117.102.113.2}1]</key>
+          <delay>30s</delay>
+          <history>7d</history>
+          <trends>30d</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <units>ms</units>
+          <applications>
+            <application>
+              <name>ISP Monitoring</name>
+            </application>
+          </applications>
+        </item>
+        <item>
+          <name>Ping ISP 2</name>
+          <type>0</type>
+          <snmp_community/>
+          <key>icmpping[{146.196.107.62}2]</key>
+          <delay>30s</delay>
+          <history>7d</history>
+          <trends>30d</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <units>ms</units>
+          <applications>
+            <application>
+              <name>ISP Monitoring</name>
+            </application>
+          </applications>
+        </item>
+      </items>
+      <triggers>
+        <trigger>
+          <description>ISP 1 DOWN on {HOST.NAME}</description>
+          <expression>{Template ISP Monitoring - Dual WAN:icmpping[{117.102.113.2}1].last()}=0</expression>
+          <priority>4</priority>
+        </trigger>
+        <trigger>
+          <description>ISP 2 DOWN on {HOST.NAME}</description>
+          <expression>{Template ISP Monitoring - Dual WAN:icmpping[{146.196.107.62}2].last()}=0</expression>
+          <priority>4</priority>
+        </trigger>
+      </triggers>
+    </template>
+  </templates>
+</zabbix_export>
